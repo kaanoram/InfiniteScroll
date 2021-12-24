@@ -16,7 +16,6 @@ async function getPhotos(){
         const response = await fetch(apiURL);
         photos = await response.json();
         displayPhotos();
-
     }
     catch(error){
         console.log(error)
@@ -35,7 +34,6 @@ function imageLoaded(){
         loader.hidden = true;
         ready = true;
     }
-
 }
 
 function displayPhotos(){
@@ -46,7 +44,12 @@ function displayPhotos(){
         const item = document.createElement('a');
         setAttributes(item, {href: photo.links.html, target: '_blank'})
         const img = document.createElement('img');
-        setAttributes(img, {src: photo.urls.regular, alt: photo.alt_description, title: photo.alt_description});
+        if (photo.alt_description !== null){
+            setAttributes(img, {src: photo.urls.regular, alt: photo.alt_description, title: photo.alt_description});
+        }
+        else{
+            setAttributes(img, {src: photo.urls.regular});
+        }
         img.addEventListener('load', imageLoaded)
         item.appendChild(img);
         imageContainer.appendChild(item);
@@ -58,7 +61,6 @@ window.addEventListener('scroll', () => {
         ready = false;
         getPhotos();
     }
-
 })
 
 getPhotos();
