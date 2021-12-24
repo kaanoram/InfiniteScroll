@@ -39,7 +39,6 @@ function imageLoaded(){
 function displayPhotos(){
     totalImages = photos.length;
     imagesLoaded = 0;
-    console.log(photos);
     for (let photo of photos){
         const item = document.createElement('a');
         setAttributes(item, {href: photo.links.html, target: '_blank'})
